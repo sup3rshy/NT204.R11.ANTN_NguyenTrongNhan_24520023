@@ -1,4 +1,4 @@
-# Project structure (from Gemini-chan):
+# Project structure (powered by Gemini-chan, i'll try coding by myself then):
 ```
 IDS_Packet_Parser/
 │
