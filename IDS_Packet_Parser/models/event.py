@@ -4,7 +4,7 @@ from typing import Any
 @dataclass 
 class IDSEvent:
     packet_id: int 
-    timestamp: float 
+    timestamp: float | None = None 
     
     # network layer 
     src_ip: str | None = None 
@@ -21,6 +21,6 @@ class IDSEvent:
     app_proto: str = "UNKNOWN"
     app_data: dict[str, Any] | None = None 
     
-    # use dict in python for compatible with json format output 
+    # use dict in python for compatible with json format output    
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)

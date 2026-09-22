@@ -1,0 +1,2 @@
+{"packet_id": 1, "timestamp": null, "src_ip": "172.22.72.179", "dst_ip": "172.64.155.209", "network_proto": "IPv4", "src_port": 42640, "dst_port": 443, "transport_proto": "TCP", "transport_flags": null, "app_proto": "UNKNOWN", "app_data": null}
+{"packet_id": 2, "timestamp": null, "src_ip": "172.64.155.209", "dst_ip": "172.22.72.179", "network_proto": "IPv4", "src_port": 443, "dst_port": 42640, "transport_proto": "TCP", "transport_flags": null, "app_proto": "UNKNOWN", "app_data": null}

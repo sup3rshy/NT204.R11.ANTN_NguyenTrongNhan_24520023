@@ -4,7 +4,7 @@ from core.capture import PacketCapture
 from pathlib import Path 
 
 def main() -> None:
-    parser = argparse.  ArgumentParser()
+    parser = argparse.ArgumentParser()
     
     group = parser.add_mutually_exclusive_group(required = True)
     group.add_argument("--interface", type = str, help = "interface name for live capture")

@@ -4,7 +4,7 @@ from models.event import IDSEvent
 from datetime import datetime 
 
 
-current_time = datetime.datetime().now().strftime("%Y%m%d_%H%M%S")
+current_time = datetime.now().strftime("%Y%m%d_%H%M%S")
 
 LOG_FILE = Path(f'ids_output_{current_time}.json') 
 
