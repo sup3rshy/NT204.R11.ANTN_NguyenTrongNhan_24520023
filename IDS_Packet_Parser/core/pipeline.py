@@ -5,26 +5,29 @@ from parsers.transport import parse_transport_layer
 from parsers.app_detector import detect_app_protocol
 from parsers.application import http, dns, smtp 
 from core.logger import log_event
+from datetime import datetime 
 
 
 def process_packet(raw_packet: Any, packet_id: int) -> None:
     
-    event = IDSEvent(packet_id = packet_id)
+    event = IDSEvent(packet_id = packet_id, timestamp = datetime.now().timestamp())
     
     try:
         parse_network_layer(raw_packet, event)
         parse_transport_layer(raw_packet, event)
         detect_app_protocol(raw_packet, event)  
-        
-        match event.app_proto:
-            case "HTTP":
-                http.parse(raw_packet, event)
-            case "DNS":
-                dns.parse(raw_packet, event)
-            case "SMTP":
-                smtp.parse(raw_packet, event)
-            case _:
-                pass 
+        try:
+            match event.app_proto:
+                case "HTTP":
+                    http.parse(raw_packet, event)
+                case "DNS":
+                    dns.parse(raw_packet, event)
+                case "SMTP":
+                    smtp.parse(raw_packet, event)
+                case _:
+                    pass 
+        except Exception as e: 
+            event.app_data = {"error": str(e)}
             
     except Exception as e:
         event.app_proto = "UNKNOWN"

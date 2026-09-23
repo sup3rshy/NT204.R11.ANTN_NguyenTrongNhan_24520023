@@ -14,7 +14,7 @@ class IDSEvent:
     # transport layer 
     src_port: int | None = None 
     dst_port: int | None = None 
-    transport_proto: str | None = None 
+    transport_proto: str = "UNKNOWN" 
     transport_flags: str | None = None 
     
     # application layer 
