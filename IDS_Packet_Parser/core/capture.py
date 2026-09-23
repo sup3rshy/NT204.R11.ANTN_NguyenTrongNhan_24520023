@@ -22,7 +22,7 @@ class PacketCapture:
     
     
     def start_pcap_import(self, pcap_file: Path) -> None:
-        if pcap_file.exists() == FALSE:
+        if pcap_file.exists() == False:
             logger.info(f'File {pcap_file} not exists')
             
         
