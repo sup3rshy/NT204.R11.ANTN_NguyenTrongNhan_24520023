@@ -28,3 +28,6 @@ IDS_Packet_Parser/
 ├── README.md                   # Thông tin project và khai báo AI usage
 └── requirements.txt
 ```
+
+# Timeline:
+- `23-9-2026 10:12AM`: Can detect network protocol. For application protocol didnt implemented payload-based detection yet. Next features: payload-based detection and application parser
