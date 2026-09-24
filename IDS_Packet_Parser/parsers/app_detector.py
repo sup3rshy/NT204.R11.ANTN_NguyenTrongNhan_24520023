@@ -14,9 +14,6 @@ def detect_app_protocol(raw_packet: Any, event: IDSEvent) -> None:
         
     elif 80 in ports:
         event.app_proto = "HTTP"
-    elif 587 in ports or 25 in ports: 
-        event.app_proto = "SMTP"
-        
     
 
     # 2. payload-based detection - implemented soon:
