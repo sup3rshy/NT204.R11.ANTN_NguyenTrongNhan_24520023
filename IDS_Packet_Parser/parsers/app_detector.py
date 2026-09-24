@@ -23,7 +23,6 @@ def detect_app_protocol(raw_packet: Any, event: IDSEvent) -> None:
     if raw_packet.haslayer(Raw):
         payload = raw_packet[Raw].load  
         
-        # not implemented yet 
         
         # http detect 
         if payload.startswith((b"GET ", b"POST ", b"PUT ", b"DELETE ", b"HEAD ", b"OPTIONS ", b"HTTP/")):

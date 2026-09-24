@@ -34,4 +34,68 @@ IDS_Packet_Parser/
 
 
 # Note 
+- Tại sao tôi lại biết format của một protocol cụ thể (không dùng AI)? Mở cyberdefenders lên tải vài chall network forensics, rồi ngắm các packet thôi. Ví dụ cụ thể
+```
+In [33]: hihi = bytes.fromhex('0008021c47aea41f72c2096a08004500004e094140008011c8ce0a040a040a040a840035cff1003abbb08701818000010001
+       ⋮ 0000000003646e73086d7366746e63736903636f6d0000010001c00c000100010000000f0004836bffff')
+In [35]: hihi = Ether(hihi)
+
+In [36]: hihi.show()
+###[ Ethernet ]###
+  dst       = 00:08:02:1c:47:ae
+  src       = a4:1f:72:c2:09:6a
+  type      = IPv4
+###[ IP ]###
+     version   = 4
+     ihl       = 5
+     tos       = 0x0
+     len       = 78
+     id        = 2369
+     flags     = DF
+     frag      = 0
+     ttl       = 128
+     proto     = udp
+     chksum    = 0xc8ce
+     src       = 10.4.10.4
+     dst       = 10.4.10.132
+     \options   \
+###[ UDP ]###
+        sport     = domain
+        dport     = 53233
+        len       = 58
+        chksum    = 0xbbb0
+###[ DNS ]###
+           id        = 34561
+           qr        = 1
+           opcode    = QUERY
+           aa        = 0
+           tc        = 0
+           rd        = 1
+           ra        = 1
+           z         = 0
+           ad        = 0
+           cd        = 0
+           rcode     = ok
+           qdcount   = 1
+           ancount   = 1
+           nscount   = 0
+           arcount   = 0
+           \qd        \
+            |###[ DNS Question Record ]###
+            |  qname     = b'dns.msftncsi.com.'
+            |  qtype     = A
+            |  unicastresponse= 0
+            |  qclass    = IN
+           \an        \
+            |###[ DNS Resource Record ]###
+            |  rrname    = b'dns.msftncsi.com.'
+            |  type      = A
+            |  cacheflush= 0
+            |  rclass    = IN
+            |  ttl       = 15
+            |  rdlen     = None
+            |  rdata     = 131.107.255.255
+           \ns        \
+           \ar        \
+```
 - Ở `parsers/app_detector.py` chúng ta chỉ cần duyệt port để kiểm tra DNS, vì ở đây đề bài không nhắc gì về DNS over HTTPS, hoặc các dạng DNS khác DNS thông thường (DNS qua UDP/TCP port 53). 
