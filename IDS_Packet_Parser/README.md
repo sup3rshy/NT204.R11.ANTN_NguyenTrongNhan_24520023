@@ -31,3 +31,7 @@ IDS_Packet_Parser/
 
 # Timeline:
 - `23-9-2026 10:12AM`: Can detect network protocol. For application protocol didnt implemented payload-based detection yet. Next features: payload-based detection and application parser
+
+
+# Note 
+- Ở `parsers/app_detector.py` chúng ta chỉ cần duyệt port để kiểm tra DNS, vì ở đây đề bài không nhắc gì về DNS over HTTPS, hoặc các dạng DNS khác DNS thông thường (DNS qua UDP/TCP port 53). 
