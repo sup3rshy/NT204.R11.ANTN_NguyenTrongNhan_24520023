@@ -35,4 +35,3 @@ def process_packet(raw_packet: Any, packet_id: int) -> None:
         
     finally:
         log_event(event)
-                
