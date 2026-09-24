@@ -21,9 +21,9 @@ def parse(raw_packet: Any, event: IDSEvent) -> None:
         smtp_command = ("HELO", "EHLO", "MAIL FROM", "RCPT TO", "DATA", "QUIT")
         if first_line.startswith(("HELO", "EHLO", "MAIL FROM", "RCPT TO", "DATA", "QUIT")):
             for cmd in smtp_command:
-                if first_line.starswith(cmd):
+                if first_line.startswith(cmd):
                     event.app_data['command'] = first_line[:len(cmd)]
-                    if len(parts) > 1:
+                    if len(first_line) > len(cmd):
                         event.app_data['argument'] = first_line[len(cmd):].strip()
         
                 
