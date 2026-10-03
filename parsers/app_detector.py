@@ -10,26 +10,22 @@ PORT_MAP = {
 }
 
 def detect_app_protocol(raw_packet: Any, event: IDSEvent) -> None:
+    ports = {p for p in (event.src_port, event.dst_port) if p is not None}
     
-    # 1. port-based detection 
-    ports = {event.src_port, event.dst_port}
-    if 53 in ports and raw_packet.haslayer(DNS):
-        # standard DNS uses port 53 (TCP/UDP) 
-        # boi vi yeu cau ko noi ve dns over https hoac cac dang dns khac, cung ko yeu cau handle case nay 
-        # nen chung ta co the tin tuong dns chi dung port 53 
+    # 1. Port-based / Layer-based detection 
+    if raw_packet.haslayer(DNS) or (53 in ports):
         event.app_proto = "DNS"
-        
-    elif 80 in ports:
-        event.app_proto = "HTTP"
-        
+        return
+
     for port in ports:
         if port in PORT_MAP:
             event.app_proto = PORT_MAP[port]
             break
 
-    # 2. payload-based detection (DPI - deep packet inspection) - implemented soon:
+    # 2. Payload-based detection (DPI - deep packet inspection):
     if raw_packet.haslayer(Raw):
         payload = raw_packet[Raw].load  
+        event.raw_payload = payload  
         
         
         # http detect 
