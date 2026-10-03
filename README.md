@@ -1,39 +1,54 @@
 # Project structure (powered by Gemini-chan, i'll try coding by myself then):
 ```
-IDS_Packet_Parser/
+Main Project Here/
 │
-├── main.py                     # Entry point chính của chương trình
+├── main.py                     # Entry point duy nhất của toàn bộ chương trình
 ├── core/
 │   ├── __init__.py
 │   ├── capture.py              # Xử lý live capture interface và pcap import
-│   ├── pipeline.py             # Điều phối luồng dữ liệu của packet
-│   └── logger.py               # Xử lý ghi file output định dạng JSON Lines
+│   ├── pipeline.py             # Điều phối: Parser -> Decoder -> Preprocessor -> Flow Tracker
+│   └── logger.py               # Xử lý ghi log JSON Lines
 │
 ├── models/
 │   ├── __init__.py
-│   └── event.py                # Định nghĩa cấu trúc Normalized IDS Event
+│   ├── event.py                # Dataclass IDSEvent (đã có từ Bài 1)
+│   └── flow.py                 # Dataclass Flow / Connection record (yêu cầu mục 5.4 Bài 2)
 │
-├── parsers/
+├── parsers/                    # BÀI TẬP 1
 │   ├── __init__.py
 │   ├── network.py              # IPv4 parser
 │   ├── transport.py            # TCP, UDP parser
-│   ├── app_detector.py         # Nhận diện protocol (Port/Payload-based)
-│   └── application/            # Các parser riêng cho HTTP, DNS, SMTP
+│   ├── app_detector.py         # Nhận diện HTTP, DNS, SMTP qua Port & Payload
+│   └── application/
 │       ├── __init__.py
 │       ├── http.py
 │       ├── dns.py
 │       └── smtp.py
 │
-├── processors/                 # CÁC MODULE MỚI CHO BÀI TẬP 2
-│   ├── __init__.py
-│   ├── decoder.py              # Module Decoder: Giải mã URL, HTML, Base64, QP...
-│   ├── preprocessor.py         # Module Preprocessor: Validation, Normalization
-│   └── flow_tracker.py         # Module Flow Tracker: Gom packet thành flow, quản lý state/timeout
+├── decoder/                    # MODULE 1: Giải mã dữ liệu (BÀI TẬP 2)
+│   ├── __init__.py             # Re-export: from .decoder import Decoder
+│   ├── url.py                  # T01: HTTP URL / percent-decoding
+│   ├── html.py                 # T02: HTML entity decoding
+│   ├── mime.py                 # T03: SMTP Base64 & Quoted-Printable
+│   └── decoder.py              # Class Decoder điều phối, xử lý T04 safe decode (thay thế main.py)
 │
-├── TEST/                       # Thư mục lưu kết quả testcase bắt buộc (T01 - T14)
-├── README.md                   # Thông tin project và khai báo AI usage
+├── preprocessor/               # MODULE 2: Tiền xử lý (BÀI TẬP 2)
+│   ├── __init__.py             # Re-export: from .preprocessor import Preprocessor
+│   ├── validator.py            # T14: Kiểm tra required fields, port range 0-65535, timestamp
+│   ├── normalizer.py           # T05: Chuẩn hóa header, domain, protocol name
+│   └── preprocessor.py         # Class Preprocessor điều phối, T06 gán status/action (thay thế main.py)
+│
+├── flow_tracker/               # MODULE 3: Quản lý luồng (BÀI TẬP 2)
+│   ├── __init__.py             # Re-export: from .tracker import FlowTracker
+│   ├── tcp_tracker.py          # T07, T09: State machine TCP (HANDSHAKE, ESTABLISHED, CLOSING, CLOSED)
+│   ├── udp_tracker.py          # T10: State tracking cho UDP
+│   ├── state_table.py          # T11, T12: Bảng băm lưu active flows & xử lý idle timeout
+│   └── tracker.py              # Class FlowTracker điều phối: tạo 5-tuple đảo chiều (T08), thống kê (T13)
+│
+├── TEST/                       # Chứa script test tự động / output testcase T01 -> T14
+├── README.md
 ├── requirements.txt
-└── pcap_samples/               # contain pcap samples for testing purpose (source: CyberDefenders) 
+└── pcap_samples/
 ```
 
 # Timeline:
