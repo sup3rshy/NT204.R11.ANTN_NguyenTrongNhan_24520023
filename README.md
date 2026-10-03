@@ -24,14 +24,20 @@ IDS_Packet_Parser/
 │       ├── dns.py
 │       └── smtp.py
 │
-├── TEST/                       # Thư mục lưu kết quả testcase bắt buộc
+├── processors/                 # CÁC MODULE MỚI CHO BÀI TẬP 2
+│   ├── __init__.py
+│   ├── decoder.py              # Module Decoder: Giải mã URL, HTML, Base64, QP...
+│   ├── preprocessor.py         # Module Preprocessor: Validation, Normalization
+│   └── flow_tracker.py         # Module Flow Tracker: Gom packet thành flow, quản lý state/timeout
+│
+├── TEST/                       # Thư mục lưu kết quả testcase bắt buộc (T01 - T14)
 ├── README.md                   # Thông tin project và khai báo AI usage
 └── requirements.txt
 ```
 
 # Timeline:
 - `23-9-2026 10:12AM`: Can detect network protocol. For application protocol didnt implemented payload-based detection yet. Next features: payload-based detection and application parser
-
+- `24-9-2026`: 
 
 # Note 
 - Tại sao tôi lại biết format của một protocol cụ thể (không dùng AI)? Mở cyberdefenders lên tải vài chall network forensics, rồi ngắm các packet thôi. Ví dụ cụ thể
