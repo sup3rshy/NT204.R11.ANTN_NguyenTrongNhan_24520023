@@ -5,6 +5,7 @@ from scapy.all import Raw
 
 def parse(raw_packet: Any, event: IDSEvent) -> None: 
     if raw_packet.haslayer(Raw) == False:
+        event.app_proto = "UNKNOWN"
         return 
     
     try:

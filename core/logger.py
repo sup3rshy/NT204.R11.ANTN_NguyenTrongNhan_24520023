@@ -9,6 +9,10 @@ current_time = datetime.now().strftime("%Y%m%d_%H%M%S")
 LOG_FILE = Path(f'ids_output_{current_time}.json') 
 
 def log_event(event: IDSEvent) -> None:
-    
     with LOG_FILE.open(mode = "a", encoding = "utf-8") as f:
-        f.write(json.dumps(event.to_dict()) + '\n') 
+        try:
+            f.write(json.dumps(event.to_dict()) + '\n') 
+        except Exception as e:
+            print(e)
+            print(event) 
+            exit(-1)

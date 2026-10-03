@@ -35,7 +35,6 @@ class PacketCapture:
     
     def _packet_handler(self, raw_packet: Any) -> None:
         # IPv4 only 
-        if raw_packet.haslayer(IP):
-            self._packet_counter += 1 
-            process_packet(raw_packet, self._packet_counter)
+        self._packet_counter += 1 
+        process_packet(raw_packet, self._packet_counter)
             
