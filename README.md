@@ -32,7 +32,8 @@ IDS_Packet_Parser/
 │
 ├── TEST/                       # Thư mục lưu kết quả testcase bắt buộc (T01 - T14)
 ├── README.md                   # Thông tin project và khai báo AI usage
-└── requirements.txt
+├── requirements.txt
+└── pcap_samples/               # contain pcap samples for testing purpose (source: CyberDefenders) 
 ```
 
 # Timeline:
