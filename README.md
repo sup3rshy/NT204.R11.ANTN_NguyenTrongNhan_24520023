@@ -41,7 +41,8 @@ IDS_Packet_Parser/
 - `24-9-2026`: 
 
 # Note 
-- Tại sao tôi lại biết format của một protocol cụ thể (không dùng AI)? Mở cyberdefenders lên tải vài chall network forensics, rồi ngắm các packet thôi. Ví dụ cụ thể
+- Code được em review từng dòng một, không bỏ một dòng nào, tự tay test, samples lấy từ CyberDefenders. Tự đọc logic các packet từ đó rồi kiểm chứng lại, đưa ra giải pháp hợp lí nhất cho từng bài toán. Chỉ dùng AI trên web để phát triển từng tính năng một lên (gemini). 
+- Tại sao em lại biết format của một protocol cụ thể (không dùng AI)? Mở cyberdefenders lên tải vài chall network forensics, rồi ngắm các packet thôi. Ví dụ cụ thể
 ```
 In [33]: hihi = bytes.fromhex('0008021c47aea41f72c2096a08004500004e094140008011c8ce0a040a040a040a840035cff1003abbb08701818000010001
        ⋮ 0000000003646e73086d7366746e63736903636f6d0000010001c00c000100010000000f0004836bffff')
