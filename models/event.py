@@ -20,7 +20,7 @@ class IDSEvent:
     # application layer 
     app_proto: str = "UNKNOWN"
     app_data: dict[str, Any] | None = None 
-    
+
     # packet metadata
     packet_len: int = 0
     raw_payload: bytes | None = None
