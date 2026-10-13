@@ -39,7 +39,7 @@ class FlowStateTable:
 
     def remove(self, flow_id: str) -> FlowRecord | None:
         """Loại bỏ thủ công một flow khi đã đóng hoàn toàn."""
-        return self.active_flows.pop(flow_id, None) 
+        return self.active_flows.pop(flow_id, None)
 
     def count(self) -> int:
         return len(self.active_flows)

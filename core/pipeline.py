@@ -6,15 +6,15 @@ from parsers.transport import parse_transport_layer
 from parsers.app_detector import detect_app_protocol
 from parsers.application import http, dns, smtp 
 from decoder import Decoder
-# from preprocessor import Preprocessor
-# from flow_tracker import FlowTracker
+from preprocessor import Preprocessor
+from flow_tracker import FlowTracker
 from core.logger import log_event
 
 
 # Khởi tạo các module xử lý trung gian
 decoder = Decoder()
 preprocessor = Preprocessor()
-# flow_tracker = FlowTracker()
+flow_tracker = FlowTracker()
 
 
 def process_packet(raw_packet: Any, packet_id: int) -> None:
@@ -54,7 +54,7 @@ def process_packet(raw_packet: Any, packet_id: int) -> None:
         preprocessor.process(event)
 
         # === BƯỚC 4: FLOW/CONNECTION TRACKER (Module 3 - T07..T13) ===
-        # flow_tracker.process_event(event)
+        flow_tracker.process_event(event)
 
     except Exception as e:
         event.app_proto = "UNKNOWN"

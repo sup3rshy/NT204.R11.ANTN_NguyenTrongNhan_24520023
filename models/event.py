@@ -37,10 +37,12 @@ class IDSEvent:
     # module 3: flow tracker metadata
     flow_id: str | None = None
     flow_direction: str | None = None
+    flow_state: str | None = None 
     
     # use dict in python for compatible with json format output    
     def to_dict(self) -> dict[str, Any]:
         data = asdict(self)
+        
         if isinstance(data.get("raw_payload"), bytes):
             # serialize bytes for JSON compatibility
             data["raw_payload"] = data["raw_payload"].hex()

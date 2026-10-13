@@ -37,4 +37,6 @@ class FlowRecord:
     _fin_directions: set | None = None 
 
     def to_dict(self) -> dict[str, Any]:
-        return asdict(self)
+        data = asdict(self)
+        data.pop("_fin_directions", None)  # Loại bỏ biến set nội bộ để an toàn khi serialize JSON
+        return data
