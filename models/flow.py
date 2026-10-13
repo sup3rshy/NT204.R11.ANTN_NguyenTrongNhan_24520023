@@ -34,6 +34,7 @@ class FlowRecord:
 
     # Active status
     is_active: bool = True
+    _fin_directions: set | None = None 
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
